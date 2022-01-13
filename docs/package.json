@@ -1,0 +1,17 @@
+{
+  "name": "@nuxt-commerce/algolia-docs",
+  "version": "1.0.0",
+  "description": "Docs for @nuxt-commerce/algolia",
+  "author": "NuxtJS",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "docus": "^0.5.14",
+    "nuxt": "^2.15.6"
+  },
+  "devDependencies": {}
+}
