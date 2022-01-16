@@ -1,7 +1,7 @@
-import { ServerResponse } from "http"
-import { CacheHeaders, PageWithCacheHeaders } from "../types"
+import { ServerResponse } from 'http'
+import { CacheHeaders, PageWithCacheHeaders } from '../types'
 
-const cacheControl = (values: CacheHeaders) => (req: Request, res: ServerResponse, next: any) => {
+const cacheControl = (values: CacheHeaders) => (_req: Request, res: ServerResponse, next: any) => {
   const cacheControlValue = Object.entries(values)
     .map(([key, value]) => `${key}=${value}`)
     .join(',')
@@ -12,8 +12,8 @@ const cacheControl = (values: CacheHeaders) => (req: Request, res: ServerRespons
 }
 
 export const createCacheControlMiddleware = (pageWithCacheHeaders: PageWithCacheHeaders) => {
-  const pagePath = pageWithCacheHeaders[0];
-  const cacheHeaders = pageWithCacheHeaders[1];
+  const pagePath = pageWithCacheHeaders[0]
+  const cacheHeaders = pageWithCacheHeaders[1]
 
   return {
     path: pagePath,
