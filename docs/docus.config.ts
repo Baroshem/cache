@@ -1,9 +1,9 @@
 export default {
-  title: '@nuxt-commerce/algolia',
-  url: 'https://algolia-nc.netlify.app',
+  title: '@nuxt-modules/cache',
+  url: 'https://cache-nm.netlify.app',
   theme: {
     colors: {
-      primary: '#5468FF',
+      primary: '#FF5F00',
       prism: {
         background: '#F4F4F5 dark:#1F2937'
       }
@@ -18,7 +18,7 @@ export default {
   },
   twitter: '@theandrewsky',
   github: {
-    repo: 'nuxt-commerce/algolia',
+    repo: 'nuxt-modules/cache',
     branch: 'main',
     releases: true
   }
