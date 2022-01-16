@@ -11,17 +11,16 @@
 > Browser and Server Cache module for [Nuxt 3](https://v3.nuxtjs.org)
 
 - [✨ &nbsp;Release Notes](https://github.com/nuxt-modules/cache/releases)
-- [📖 &nbsp;Read the documentation](https://cache-nc.netlify.app)
+- [📖 &nbsp;Read the documentation](https://cache-nm.netlify.app)
 
 ## Features
 
 - Nuxt 3 ready
-- Browser cache using headers
-- Server cache using Redis, memory, etc
-- Handy composables like useCache
+- Easy Browser Cache Control middleware
+- Powerful Server Cache with Redis, memcached, etc [Coming soon]
 - TypeScript support
 
-[📖 &nbsp;Read the documentation](https://cache-nc.netlify.app)
+[📖 &nbsp;Read the documentation](https://cache-nm.netlify.app)
 
 ## Setup
 
@@ -38,22 +37,28 @@ Firstly, you need to add `@nuxt-modules/cache` to your Nuxt config.
 // nuxt.config.js
 
 {
-  modules: [
+  buildModules: [
     [
       '@nuxt-modules/cache',
       {
-        // TBD
+        browser: {
+          pages: [
+            ['/', { 'max-age': 3600, 'stale-when-revalidate': 10 }],
+            ['/product', { 'max-age': 3600, 'stale-when-revalidate': 10 }],
+            ['/category', { 'max-age': 3600, 'stale-when-revalidate': 10 }]
+          ]
+        }
       }
     ]
   ]
 }
 ```
 
-Then you can start using `@nuxt-modules/cache` in your setup function!
+And that's it! The module is registered and now your pages will have cache-control headers applied.
 
-```ts
-// TBD
-```
+For more configuration options, please visit the [docs](https://cache-nm.netlify.app)
+
+Configuration of server cache will be added in the next versions.
 
 ## Development
 
