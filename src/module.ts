@@ -1,57 +1,30 @@
-import defu from 'defu'
-import { resolve } from 'pathe'
-import { defineNuxtModule, addPlugin } from '@nuxt/kit'
-import type { Nuxt } from '@nuxt/schema'
-import type { AlgoliaOptions } from './types'
+import { defineNuxtModule, addServerMiddleware } from '@nuxt/kit'
+import type { CacheOptions } from './types'
+import { createCacheControlMiddleware } from './middleware/cache-control'
 
-export default defineNuxtModule<AlgoliaOptions>({
-  name: '@nuxt-commerce/algolia',
-  configKey: 'algolia',
-  setup (options: AlgoliaOptions, nuxt: Nuxt) {
-    type Values = {
-      [key: string]: any;
+export default defineNuxtModule<CacheOptions>({
+  name: '@nuxt-modules/cache',
+  configKey: 'cache',
+  setup (options: CacheOptions) {
+
+    if (options.browser && !options.browser.pages.length) {
+      throw new Error('Missing `browser.pages` option. Provide array of pages you want to apply cache to.')
     }
 
-    const cacheControl = (values: Values) => (req, res, next) => {
-      const cacheControlValue = Object.entries(values)
-        .map(([key, value]) => `${key}=${value}`)
-        .join(',')
+    if (options.browser && options.browser.pages.length) {
+      options.browser.pages.forEach(page => {
+        if (typeof page[0] !== 'string') {
+          console.error('First element of page must be a `string`')
+          return;
+        }
+        if (typeof page[1] !== 'object') {
+          console.error('Second element of page must be an `object`')
+          return;
+        }
 
-      res.setHeader('Cache-Control', cacheControlValue)
-
-      next()
+        addServerMiddleware(createCacheControlMiddleware(page))
+      })
     }
-
-    const cacheControlMiddleware = (pages: string[], headers: Values) => pages.map(pagePath => ({
-      path: pagePath,
-      handler: cacheControl(headers)
-    }))
-
-    https://github.com/arash16/nuxt-ssr-cache
-
-    ...cacheControlMiddleware(['/', '/product', '/category'], {
-      'max-age': 60,
-      'stale-when-revalidate': 5
-    }),
-
-    if (!options.apiKey) {
-      throw new Error('Missing `apiKey`')
-    }
-
-    if (!options.applicationId) {
-      throw new Error('Missing `applicationId`')
-    }
-
-    nuxt.options.publicRuntimeConfig.algolia = defu(nuxt.options.publicRuntimeConfig.algolia, {
-      apiKey: options.apiKey,
-      applicationId: options.applicationId
-    })
-
-    addPlugin(resolve(__dirname, './plugins/algolia'))
-
-    nuxt.hook('autoImports:dirs', (dirs) => {
-      dirs.push(resolve(__dirname, './composables'))
-    })
   }
 })
 
@@ -60,13 +33,7 @@ export * from './types'
 declare module '@nuxt/schema' {
   interface ConfigSchema {
     publicRuntimeConfig?: {
-      algolia?: AlgoliaOptions
+      cache?: CacheOptions;
     }
-  }
-  interface NuxtConfig {
-    algolia?: AlgoliaOptions
-  }
-  interface NuxtOptions {
-    algolia?: AlgoliaOptions
   }
 }
