@@ -3,8 +3,13 @@ import { defineNuxtConfig } from 'nuxt3'
 export default defineNuxtConfig({
   buildModules: [
     ['../src/module', {
-      apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
-      applicationId: process.env.ALGOLIA_APPLICATION_ID
+      browser: {
+        pages: [
+          ['/', { 'max-age': 3600, 'stale-when-revalidate': 10 }],
+          ['/product', { 'max-age': 3600, 'stale-when-revalidate': 10 }],
+          ['/category', { 'max-age': 3600, 'stale-when-revalidate': 10 }]
+        ]
+      }
     }]
   ]
 })
