@@ -1,5 +1,5 @@
 <template>
   <div>
-    Home Page
+    Product Page
   </div>
 </template>

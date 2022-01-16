@@ -1,5 +1,5 @@
 <template>
   <div>
-    Home Page
+    Category Page
   </div>
 </template>
