@@ -1,6 +1,6 @@
 [![@nuxt-modules/cache](https://cache-nm.netlify.app/preview.png)](https://cache-nm.netlify.app)
 
-# @nuxt-modules/cache [WIP]
+# @nuxt-modules/cache
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
