@@ -56,6 +56,8 @@ Firstly, you need to add `@nuxt-modules/cache` to your Nuxt config.
 
 And that's it! The module is registered and now your pages will have cache-control headers applied.
 
+[![@nuxt-modules/cache](https://cache-nm.netlify.app/cache-control.png)](https://cache-nm.netlify.app)
+
 For more configuration options, please visit the [docs](https://cache-nm.netlify.app)
 
 Configuration of server cache will be added in the next versions.
