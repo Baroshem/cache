@@ -28,11 +28,3 @@ export default defineNuxtModule<CacheOptions>({
 })
 
 export * from './types'
-
-declare module '@nuxt/schema' {
-  interface ConfigSchema {
-    publicRuntimeConfig?: {
-      cache?: CacheOptions;
-    }
-  }
-}
