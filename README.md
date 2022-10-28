@@ -1,6 +1,8 @@
 [![@nuxt-modules/cache](https://cache-nm.netlify.app/preview.png)](https://cache-nm.netlify.app)
 
-# @nuxt-modules/cache
+# [DEPRECATED] @nuxt-modules/cache
+
+As of Nuxt 3.rc-12 you can use routeRoules so this module is now deprecated. Please use official Nuxt approach
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
